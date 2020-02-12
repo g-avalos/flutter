@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notas/services/auth.dart';
+import 'package:notas/shared/decoration.dart';
+import 'package:notas/shared/loading.dart';
 
 class Register extends StatefulWidget {
   final Function cambiarVista;
@@ -17,11 +19,11 @@ class _RegisterState extends State<Register> {
   String email = '';
   String pwd = '';
   String error = '';
-
+  bool loading = false;
+  
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
+    return loading ? Loading() : Scaffold(
         backgroundColor: Colors.brown[100],
         appBar: AppBar(
           backgroundColor: Colors.brown[400],
@@ -45,6 +47,7 @@ class _RegisterState extends State<Register> {
               children: <Widget>[
                 SizedBox(height: 20.0),
                 TextFormField(
+                  decoration: textDecoration.copyWith(hintText: 'EMail'),
                   validator: (val) => val.isEmpty ? 'El usuario no puede estar vacio' : null,
                   onChanged: (val) {
                     setState(() {
@@ -54,11 +57,20 @@ class _RegisterState extends State<Register> {
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
+                  decoration: textDecoration.copyWith(hintText: 'Password'),
                   validator: (val) => val.length < 6 ? 'La clave debe tener mas de 6 caracteres' : null,
                   obscureText: true,
                   onChanged: (val) {
                     setState(() => pwd = val);
                   },
+                ),
+                SizedBox(height: 20.0),
+                TextFormField(
+                  decoration: textDecoration.copyWith(hintText: 'Password'),
+                  validator: (val) {
+                    return val != pwd ? 'La clave no coincide' : null;
+                  },
+                  obscureText: true,
                 ),
                 SizedBox(height: 20.0),
                 RaisedButton(
@@ -69,10 +81,14 @@ class _RegisterState extends State<Register> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
+                      setState(() => loading = true);
                       dynamic user = await _authService.registerWithUserAndPassword(email, pwd);
 
                       if (user == null) {
-                        setState(() => error = 'Por favor ingrese un mail valido');
+                        setState(() {
+                          error = 'Por favor ingrese un mail valido';
+                          loading = false;
+                        });
                       }
                     }
                   }
@@ -86,7 +102,6 @@ class _RegisterState extends State<Register> {
             )
           )
         ),
-      ) ,
     );
   }
 }
