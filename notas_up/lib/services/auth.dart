@@ -44,4 +44,15 @@ class AuthService {
       return null;
     }
   }
+
+  //Sing In con mail y clave
+  Future singInWithUserAndPassword(String email, String pwd) async {
+    try {
+      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: pwd);
+      return _userFormFBUser(result.user);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }
