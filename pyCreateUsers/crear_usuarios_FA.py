@@ -48,18 +48,18 @@ while d:
         user = auth.get_user_by_email(mail)
 
     alumno = {
-        "dni": d[9],
+        "dni": str(d[9]).replace('.0', ''),
         "nombre": d[8], 
         "mail": d[10], 
-        "cohorte": d[6],
-        "cuatrimestre_ingreso": d[7],
+        "cohorte": str(d[6]).replace('.0', ''),
+        "cuatrimestre_ingreso": str(d[7]).replace('.0', ''),
         "notas": []
         } 
     while d and mail == d[10]:
         nota = {
                 "codigo": d[5],
                 "nombre": d[4],
-                "anio_cursada": d[1],
+                "anio_cursada": str(d[1]).replace('.0', ''),
                 "curso": d[2],
                 "cuatrimestre": d[3],
                 "condicion": d[12],
