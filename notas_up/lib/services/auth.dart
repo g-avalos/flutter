@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_twitter_login/flutter_twitter_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:notas/models/user.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final TwitterLogin _twitterLogin = new TwitterLogin();
 
   User _userFormFBUser(FirebaseUser fbu) {
     return fbu != null ? User(uid: fbu.uid) : null;
@@ -78,21 +76,4 @@ class AuthService {
 
   //--- logout google
   void signOutGoogle() async{}
-
-  //--- login con facebook
-  Future signInWithTwiteer() async {
-    try {
-      final TwitterLogin tl = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication gAuth = await gsa.authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.getCredential(idToken: gAuth.idToken, accessToken: gAuth.accessToken);
-      
-      AuthResult result = await _auth.signInWithCredential(credential);
-      return _userFormFBUser(result.user);
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
-  }
-
-}
+ }

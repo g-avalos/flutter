@@ -22,12 +22,6 @@
 @import firebase_core;
 #endif
 
-#if __has_include(<flutter_twitter_login/TwitterLoginPlugin.h>)
-#import <flutter_twitter_login/TwitterLoginPlugin.h>
-#else
-@import flutter_twitter_login;
-#endif
-
 #if __has_include(<google_sign_in/FLTGoogleSignInPlugin.h>)
 #import <google_sign_in/FLTGoogleSignInPlugin.h>
 #else
@@ -40,7 +34,6 @@
   [FLTCloudFirestorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTCloudFirestorePlugin"]];
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
-  [TwitterLoginPlugin registerWithRegistrar:[registry registrarForPlugin:@"TwitterLoginPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
 }
 

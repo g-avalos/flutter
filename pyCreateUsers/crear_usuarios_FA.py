@@ -1,0 +1,86 @@
+import firebase_admin
+from firebase_admin import auth
+from firebase_admin import credentials
+from firebase_admin import firestore
+from Google import Create_Service
+import pandas
+import numpy as np 
+
+def getData(sheet):
+    CLIENT_SECRET_FILE = 'credentials.json'
+    API_SERVICE_NAME = 'sheets'
+    API_VERSION = 'v4'
+    SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+
+    s = Create_Service(CLIENT_SECRET_FILE, API_SERVICE_NAME, API_VERSION, SCOPES)
+    gs = s.spreadsheets()
+
+    rows = gs.values().get(spreadsheetId=sheet, range='notas').execute()
+    return rows.get('values')
+
+def getDataFileFromFile(file):
+    df = pandas.read_csv(file)
+    df = df.to_numpy().tolist()
+    return df
+
+#data = getData('1abDK78iGi_C51Z--tMAWV4SISATnpuy2vImOJeB4EdY')
+data = getDataFileFromFile('Notas - notas.csv')
+
+# Use a service account
+cred = credentials.Certificate('ifts11notas-firebase-adminsdk-evg7d-26793f5162.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+i = 0
+d = data[i]
+while d:
+    if d[2] == 'Curso':
+        continue
+
+    mail = d[10]
+    nombre = d[8]
+
+    try:
+        print("---> Creando: ", d[10])
+        user = auth.create_user(email=mail, password='123456')
+    except:
+        print("---> Loggeando: ", d[10])
+        user = auth.get_user_by_email(mail)
+
+    alumno = {
+        "dni": d[9],
+        "nombre": d[8], 
+        "mail": d[10], 
+        "cohorte": d[6],
+        "cuatrimestre_ingreso": d[7],
+        "notas": []
+        } 
+    while d and mail == d[10]:
+        nota = {
+                "codigo": d[5],
+                "nombre": d[4],
+                "anio_cursada": d[1],
+                "curso": d[2],
+                "cuatrimestre": d[3],
+                "condicion": d[12],
+                "estado": d[18],
+                "nota_cursada": d[13],
+                "fecha_cursada": d[14],
+                "nota_final": d[15],
+                "fecha_final": d[16] if d[16] == None else  '',
+                "llamado": d[17] if d[17] == None else  ''
+                }
+
+        alumno['notas'].append(nota)
+
+        i += 1
+        d = data[i]
+
+    print("grabando: ", nombre)
+    #print("notas: ", alumno)
+
+    doc_ref = db.collection(u'alumnos').document(user.uid)
+    doc_ref.set(alumno)
+    print("grabo: ", nombre)
+
+    print("=====> proximo: ", d[8])
