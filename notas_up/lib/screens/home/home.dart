@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notas/models/alumno.dart';
 import 'package:notas/screens/home/alumno_notas.dart';
+import 'package:notas/screens/home/settings_form.dart';
 import 'package:notas/services/auth.dart';
 import 'package:notas/services/database.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,14 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _showSettings() {
+      showDialog(context: context, builder: (context) {
+        return AlertDialog(
+          content: FormSettings(),
+        );
+      });
+    }
+
     return StreamProvider<List<Alumno>>.value(
         value: DatabaseService().alumnos,
         child: Scaffold(
@@ -25,7 +34,12 @@ class Home extends StatelessWidget {
               }, 
               icon: Icon(Icons.person), 
               label: Text('Sing Out')
-            )
+            ),
+            FlatButton.icon(
+              onPressed: () => _showSettings(), 
+              icon: Icon(Icons.settings), 
+              label: Text('Perfil')
+            ),
           ],
         ),
         body: AlumnosNotas(),

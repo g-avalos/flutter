@@ -26,44 +26,59 @@ class DatabaseService {
     return await notas.document(uid).get();
   }
 
+  Future updateAlumno(Alumno a) async {
+    return await notas.document(uid).setData({
+      'nombre': a.nombre,
+      'dni': a.dni,
+    });
+  }
+  
   Stream<List<Alumno>> get alumnos {
     return notas.snapshots().map(_alumnosFromSnapshot);
   }
 
+  Stream<Alumno> get alumno {
+    return notas.document(uid).snapshots().map(_toAlumno);
+  }
+
   List<Alumno> _alumnosFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) {
-      final Map <String, dynamic> d = doc.data;
-
-      Alumno a = Alumno(
-        cohorte: d['cohorte'] ?? 0,
-        cuatrimestreIngreso: d['cuatrimestre_ingreso'] ?? '',
-        dni: d['dni'] ?? '',
-        mail: d['mail'] ?? '',
-        nombre: d['nombre'] ?? '',
-        notas: [],
-      );
-
-      var notas = d['notas'];
-      if (notas != null && notas.length != 0) {
-        for (var n in notas) {
-          a.notas.add(Nota(
-            anioCursada: n['amio_cursada'] ?? '',
-            codigo: n['codigo'] ?? '',
-            condicion: n['condicion'] ?? '',
-            cuatrimestre: n['cuatrimestre'] ?? '',
-            curso: n['curso'] ?? '',
-            estado: n['estado'] ?? '',
-            fechaCursada: n['fecha_cursada'] ?? '',
-            fechaFinal: n['fecha_final'] ?? '',
-            llamado: n['llamado'] ?? '',
-            nombre: n['nombre'] ?? '',
-            notaCursada: n['nota_cursada'] ?? '',
-            notaFinal: n['nota_final'] ?? '',
-            )
-          );
-        }
-      }
-      return a;
+    return snapshot.documents.map((doc) { 
+      return _toAlumno(doc);
     }).toList();
+  }
+  
+  Alumno _toAlumno(DocumentSnapshot doc) {
+    final Map <String, dynamic> d = doc.data;
+
+    Alumno a = Alumno(
+      cohorte: d['cohorte'] ?? 0,
+      cuatrimestreIngreso: d['cuatrimestre_ingreso'] ?? '',
+      dni: d['dni'] ?? '',
+      mail: d['mail'] ?? '',
+      nombre: d['nombre'] ?? '',
+      notas: [],
+    );
+
+    var notas = d['notas'];
+    if (notas != null && notas.length != 0) {
+      for (var n in notas) {
+        a.notas.add(Nota(
+          anioCursada: n['amio_cursada'] ?? '',
+          codigo: n['codigo'] ?? '',
+          condicion: n['condicion'] ?? '',
+          cuatrimestre: n['cuatrimestre'] ?? '',
+          curso: n['curso'] ?? '',
+          estado: n['estado'] ?? '',
+          fechaCursada: n['fecha_cursada'] ?? '',
+          fechaFinal: n['fecha_final'] ?? '',
+          llamado: n['llamado'] ?? '',
+          nombre: n['nombre'] ?? '',
+          notaCursada: n['nota_cursada'] ?? '',
+          notaFinal: n['nota_final'] ?? '',
+          )
+        );
+      }
+    }
+    return a;
   }
 }

@@ -13,7 +13,7 @@ class AlumnosNotas extends StatefulWidget {
 class _AlumnosNotasState extends State<AlumnosNotas> {
   @override
   Widget build(BuildContext context) {
-    final alumnos = Provider.of<List<Alumno>>(context);
+    final alumnos = Provider.of<List<Alumno>>(context) ?? [];
 
     return ListView.builder(
       itemCount: alumnos.length,

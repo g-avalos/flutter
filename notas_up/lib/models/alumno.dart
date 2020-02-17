@@ -11,10 +11,22 @@ class Alumno {
   Alumno({this.cohorte, this.cuatrimestreIngreso, this.dni, this.mail, this.nombre, this.notas });
 
   int aprobadas() {
-    return notas.where((n) => n.condicion == "Promoción" || n.condicion == "Final").toList().length;
+    try {
+      return notas.where((n) => n.condicion == "Promoción" || n.condicion == "Final").toList().length;
+    } catch (e) {
+      print(e);
+    }
+
+    return 0;
   }
 
   int cursadas() {
-    return notas.where((n) => n.condicion == "Cursada").toList().length;
+    try {
+      return notas.where((n) => n.condicion == "Cursada").toList().length;
+    } catch (e) {
+      print(e);
+    }
+
+    return 0;
   }
 }
