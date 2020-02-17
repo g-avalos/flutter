@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notas/models/alumno.dart';
+import 'package:notas/screens/home/notas.dart';
 
 class AlumnoTile extends StatelessWidget {
   final Alumno alumno;
@@ -9,18 +10,25 @@ class AlumnoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-       padding: EdgeInsets.only(top: 8.0),
-       child: Card(
-          margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
-          child: ListTile(
-            leading: CircleAvatar(
-              radius: 25,
-              backgroundColor: Colors.brown[100],
-            ),
-            title: Text(alumno.nombre),
-            subtitle: Text('Materias: ${alumno.aprobadas()} aprobadas - ${alumno.cursadas()} cursadas'),
+      padding: EdgeInsets.only(top: 8.0),
+      child: Card(
+        margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
+        child: ListTile(
+          leading: CircleAvatar(
+            radius: 25,
           ),
-       ),
+          title: Text(alumno.nombre),
+          subtitle: Text('Materias: ${alumno.aprobadas()} aprobadas - ${alumno.cursadas()} cursadas'),
+          onTap: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Notas(alumno: alumno,),
+              )
+            )
+          }
+        ),
+      ),
     );
   }
 }

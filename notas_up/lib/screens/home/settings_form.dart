@@ -63,8 +63,7 @@ class _FormSettingsState extends State<FormSettings> {
               ), 
               SizedBox(height: 20),
               RaisedButton(
-                color: Colors.pink[400],
-                child: Text('Guardar', style: TextStyle(color: Colors.white),),
+                child: Text('Guardar', ),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     alumno.dni = _currentDni ?? alumno.dni;

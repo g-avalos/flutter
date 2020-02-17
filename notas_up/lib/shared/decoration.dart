@@ -28,3 +28,11 @@ const textDecoration = InputDecoration(
     ),
   ),
   );
+
+const bgDecoration = BoxDecoration(
+    border: Border(),
+    image: DecorationImage(
+      fit: BoxFit.fill,
+      image: AssetImage("assets/bg.jpg"),
+    ),
+  );

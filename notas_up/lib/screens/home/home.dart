@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notas/models/alumno.dart';
-import 'package:notas/screens/home/alumno_notas.dart';
+import 'package:notas/screens/home/alumnos.dart';
 import 'package:notas/screens/home/settings_form.dart';
 import 'package:notas/services/auth.dart';
 import 'package:notas/services/database.dart';
@@ -22,11 +22,9 @@ class Home extends StatelessWidget {
     return StreamProvider<List<Alumno>>.value(
         value: DatabaseService().alumnos,
         child: Scaffold(
-        backgroundColor: Colors.brown[50],
         appBar: AppBar(
           title: Text('Home'),
           elevation: 0.0,
-          backgroundColor: Colors.brown[400],
           actions: <Widget>[
             FlatButton.icon(
               onPressed: () async {
@@ -42,7 +40,9 @@ class Home extends StatelessWidget {
             ),
           ],
         ),
-        body: AlumnosNotas(),
+        body: Container(
+          child: Alumnos(),
+        ),
       ),
     );
   }

@@ -10,12 +10,11 @@ class BotonRedondoConImagen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
-      splashColor: Colors.grey,
+    return RaisedButton(
       onPressed: onPressed,
+      autofocus: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      highlightElevation: 1,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -30,7 +29,6 @@ class BotonRedondoConImagen extends StatelessWidget {
                 texto,
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey[600],
                 ),
               ),
             )
@@ -50,12 +48,11 @@ class BotonRedondo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
-      splashColor: Colors.grey,
+    return RaisedButton(
       onPressed: onPressed,
+      autofocus: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-      highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.grey),
+      highlightElevation: 1,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -69,7 +66,6 @@ class BotonRedondo extends StatelessWidget {
                 texto,
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.grey[600],
                 ),
               ),
             )

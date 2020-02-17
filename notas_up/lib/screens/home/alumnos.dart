@@ -3,14 +3,14 @@ import 'package:notas/models/alumno.dart';
 import 'package:notas/screens/home/alumno_tile.dart';
 import 'package:provider/provider.dart';
 
-class AlumnosNotas extends StatefulWidget {
-  AlumnosNotas({Key key}) : super(key: key);
+class Alumnos extends StatefulWidget {
+  Alumnos({Key key}) : super(key: key);
 
   @override
-  _AlumnosNotasState createState() => _AlumnosNotasState();
+  _AlumnosState createState() => _AlumnosState();
 }
 
-class _AlumnosNotasState extends State<AlumnosNotas> {
+class _AlumnosState extends State<Alumnos> {
   @override
   Widget build(BuildContext context) {
     final alumnos = Provider.of<List<Alumno>>(context) ?? [];

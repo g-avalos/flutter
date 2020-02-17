@@ -13,6 +13,9 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
         value: AuthService().user,
         child: MaterialApp(
+          title: 'I.F.T.S. N° 11',
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(), 
           home: Wrapper(),
       ),
     );

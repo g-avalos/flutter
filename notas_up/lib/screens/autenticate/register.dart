@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notas/screens/autenticate/widgets.dart';
 import 'package:notas/services/auth.dart';
 import 'package:notas/shared/decoration.dart';
 import 'package:notas/shared/loading.dart';
@@ -24,23 +25,21 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-        backgroundColor: Colors.brown[100],
         appBar: AppBar(
-          backgroundColor: Colors.brown[400],
           elevation: 0.0,
-          title: Text('Registrate en IFTS N° 11'),
+          title: Text('I.F.T.S. N° 11',),
           actions: <Widget>[
             FlatButton.icon(
               onPressed: () {
                 widget.cambiarVista();
               },
               icon: Icon(Icons.person),
-              label: Text('Sing In')
+              label: Text('Sing In',)
             ),
           ],
         ),
         body: Container(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Form(
             key: _formKey,
             child: Column(
@@ -73,12 +72,8 @@ class _RegisterState extends State<Register> {
                   obscureText: true,
                 ),
                 SizedBox(height: 20.0),
-                RaisedButton(
-                  color: Colors.blue[300],
-                  child: Text(
-                    'Registrarse',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                BotonRedondo(
+                  texto: 'Registrarse',
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       setState(() => loading = true);

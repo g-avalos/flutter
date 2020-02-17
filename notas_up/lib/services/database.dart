@@ -12,14 +12,16 @@ class DatabaseService {
   final CollectionReference notas = Firestore.instance.collection('alumnos');
 
   Future crearDatosIniciales() async {
+    Alumno a = Alumno();
+
     return await notas.document(uid).setData({
-        "dni": '',
-        "nombre": '', 
+        "dni": a.dni,
+        "nombre": a.nombre, 
         "mail": mail, 
-        "cohorte": '2020',
-        "cuatrimestre_ingreso": '1',
-        "notas": []
-        });
+        "cohorte": a.cohorte,
+        "cuatrimestre_ingreso": a.cuatrimestreIngreso,
+        "notas": a.notas
+      });
   }
 
   Future getData() async {
@@ -42,25 +44,25 @@ class DatabaseService {
   }
 
   List<Alumno> _alumnosFromSnapshot(QuerySnapshot snapshot) {
-    return snapshot.documents.map((doc) { 
-      return _toAlumno(doc);
-    }).toList();
+    return snapshot.documents.map(_toAlumno).toList();
   }
   
   Alumno _toAlumno(DocumentSnapshot doc) {
     final Map <String, dynamic> d = doc.data;
 
-    Alumno a = Alumno(
-      cohorte: d['cohorte'] ?? 0,
-      cuatrimestreIngreso: d['cuatrimestre_ingreso'] ?? '',
-      dni: d['dni'] ?? '',
-      mail: d['mail'] ?? '',
-      nombre: d['nombre'] ?? '',
-      notas: [],
-    );
+    Alumno a;
 
-    var notas = d['notas'];
-    if (notas != null && notas.length != 0) {
+    try {
+      a = Alumno(
+        cohorte: d['cohorte'] ?? '',
+        cuatrimestreIngreso: d['cuatrimestre_ingreso'] ?? '',
+        dni: d['dni'] ?? '',
+        mail: d['mail'] ?? '',
+        nombre: d['nombre'] ?? '',
+        notas: [],
+      );
+
+      var notas = d['notas'] ?? [];
       for (var n in notas) {
         a.notas.add(Nota(
           anioCursada: n['amio_cursada'] ?? '',
@@ -78,7 +80,11 @@ class DatabaseService {
           )
         );
       }
+    } catch (e) {
+      a = Alumno();
+      print(e);
     }
+
     return a;
   }
 }

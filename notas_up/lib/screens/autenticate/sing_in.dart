@@ -24,18 +24,16 @@ class _SingInState extends State<SingIn> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.brown[100],
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sing in en IFTS N° 11'),
+        title: Text('I.F.T.S. N° 11',),
         actions: <Widget>[
           FlatButton.icon(
-              onPressed: () {
-                widget.cambiarVista();
-              },
-              icon: Icon(Icons.person),
-              label: Text('Registrarse')),
+            onPressed: () {
+              widget.cambiarVista();
+            },
+            icon: Icon(Icons.person),
+            label: Text('Registrarse')),
         ],
       ),
       body: Container(
@@ -82,11 +80,6 @@ class _SingInState extends State<SingIn> {
                   },
                 ),
                 SizedBox(height: 20.0),
-                Text(
-                  error, 
-                  style: TextStyle(color: Colors.red[500], fontSize: 14.0),
-                ),
-                SizedBox(height: 50.0),
                 BotonRedondoConImagen(
                   texto: "Sing In with Google",
                   imagen: Image(image: AssetImage("assets/google-logo.png"), height: 35.0),
@@ -102,6 +95,11 @@ class _SingInState extends State<SingIn> {
                       });
                     }
                   },
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  error, 
+                  style: TextStyle(color: Colors.red[500], fontSize: 14.0),
                 ),
               ],
           ))),
