@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notas/models/alumno.dart';
-import 'package:notas/screens/home/notas.dart';
+import 'package:notas/screens/home/notas_page.dart';
 
 class AlumnoTile extends StatelessWidget {
   final Alumno alumno;
@@ -23,7 +23,7 @@ class AlumnoTile extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Notas(alumno: alumno,),
+                builder: (context) => NotasPage(notas: alumno.notas,),
               )
             )
           }
