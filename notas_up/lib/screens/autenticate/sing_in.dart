@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:notas/screens/autenticate/widgets.dart';
 import 'package:notas/services/auth.dart';
 import 'package:notas/shared/decoration.dart';
-import 'package:notas/shared/loading.dart';
 
 class SingIn extends StatefulWidget {
   final Function cambiarVista;
@@ -23,7 +23,7 @@ class _SingInState extends State<SingIn> {
 
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : Scaffold(
+    return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
         title: Text('I.F.T.S. N° 11',),
@@ -36,7 +36,8 @@ class _SingInState extends State<SingIn> {
             label: Text('Registrarse')),
         ],
       ),
-      body: Container(
+      body: ModalProgressHUD(
+        child: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: Form(
               key: _formKey,
@@ -102,7 +103,10 @@ class _SingInState extends State<SingIn> {
                   style: TextStyle(color: Colors.red[500], fontSize: 14.0),
                 ),
               ],
-          ))),
-    );
+            ),
+          ),
+        ), 
+        inAsyncCall: loading),
+      );
   }
 }

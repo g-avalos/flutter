@@ -36,3 +36,27 @@ const bgDecoration = BoxDecoration(
       image: AssetImage("assets/bg.jpg"),
     ),
   );
+
+const titulo = TextStyle(
+    fontFamily: "SofiaPro", 
+    color: Colors.black, 
+    fontSize: 22, 
+    fontStyle: FontStyle.normal, 
+    fontWeight: FontWeight.bold
+  );
+
+const subtitulo = TextStyle(
+    fontFamily: "SofiaPro", 
+    color: Colors.black, 
+    fontSize: 18, 
+    fontStyle: FontStyle.normal, 
+    fontWeight: FontWeight.normal
+  );
+
+const texto = TextStyle(
+    fontFamily: "SofiaPro", 
+    color: Colors.black, 
+    fontSize: 16, 
+    fontStyle: FontStyle.normal, 
+    fontWeight: FontWeight.normal
+  );

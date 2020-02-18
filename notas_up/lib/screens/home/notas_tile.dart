@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notas/models/nota.dart';
-
+import 'package:notas/shared/decoration.dart';
 
 class NotasTile extends StatelessWidget {
   final Nota nota;
@@ -8,16 +8,77 @@ class NotasTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 8.0),
+    return Center(
       child: Card(
-        margin: EdgeInsets.fromLTRB(20, 6, 20, 0),
-        child: ListTile(
-          leading: CircleAvatar(
-            radius: 25,
-          ),
-          title: Text(nota.nombre),
-          subtitle: Text(nota.notaFinal),
+//        color: (nota.curso == 'Primero') ? Colors.brown[300] : (nota.curso == 'Segundo') ? Colors.yellow[300] : Colors.blue[300],
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            ListTile(
+              title: Text(nota.nombre, style: titulo),
+              subtitle: Text(nota.curso, style: subtitulo,),
+            ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text('Fecha cursada: ', style: texto,),
+                        Text(nota.fechaCursada, style: texto,),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Nota cursada: ', style: texto,),
+                          Text(nota.notaCursada, style: texto,), 
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text('Fecha final: ', style: texto,),
+                        Text(nota.fechaFinal, style: texto,),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text('Nota final: ', style: texto,),
+                          Text(nota.notaFinal, style: texto,), 
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

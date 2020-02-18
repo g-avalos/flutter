@@ -3,7 +3,6 @@ import 'package:notas/models/alumno.dart';
 import 'package:notas/models/user.dart';
 import 'package:notas/services/database.dart';
 import 'package:notas/shared/decoration.dart';
-import 'package:notas/shared/loading.dart';
 import 'package:provider/provider.dart';
 
 class FormSettings extends StatefulWidget {
@@ -26,7 +25,7 @@ class _FormSettingsState extends State<FormSettings> {
       stream: DatabaseService(uid: user.uid).alumno,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Loading();
+          return CircularProgressIndicator();
         }
 
         Alumno alumno = snapshot.data;
@@ -36,7 +35,6 @@ class _FormSettingsState extends State<FormSettings> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text("Modifica tu perfil"),
               SizedBox(height: 10),
               Text("Nombre"),
               SizedBox(height: 10),
