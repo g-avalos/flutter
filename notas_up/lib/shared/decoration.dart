@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 const textDecoration = InputDecoration(
@@ -59,4 +61,15 @@ const texto = TextStyle(
     fontSize: 16, 
     fontStyle: FontStyle.normal, 
     fontWeight: FontWeight.normal
+  );
+
+const textoFixed = TextStyle(
+    fontFamily: "SofiaPro", 
+    color: Colors.black, 
+    fontSize: 16, 
+    fontStyle: FontStyle.normal, 
+    fontWeight: FontWeight.normal,
+    fontFeatures: [
+      FontFeature.tabularFigures()
+    ],  
   );

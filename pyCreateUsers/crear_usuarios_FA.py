@@ -77,10 +77,10 @@ while d:
         d = data[i]
 
     print("grabando: ", nombre)
-    #print("notas: ", alumno)
+    print("notas: ", alumno)
 
     doc_ref = db.collection(u'alumnos').document(user.uid)
-    doc_ref.set(alumno)
+    #doc_ref.set(alumno)
     print("grabo: ", nombre)
 
     print("=====> proximo: ", d[8])

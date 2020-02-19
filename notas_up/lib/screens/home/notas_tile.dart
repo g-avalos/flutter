@@ -19,63 +19,53 @@ class NotasTile extends StatelessWidget {
               subtitle: Text(nota.curso, style: subtitulo,),
             ),
             Row(
+              mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text('Fecha cursada: ', style: texto,),
-                        Text(nota.fechaCursada, style: texto,),
-                        ],
-                      ),
-                    ],
-                  ),
+                Column(
+                  children: <Widget>[
+                    Text('Fecha cursada: ', style: textoFixed,),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text('Nota cursada: ', style: texto,),
-                          Text(nota.notaCursada, style: texto,), 
-                        ],
-                      ),
-                    ],
-                  ),
+                Column(
+                  children: <Widget>[
+                    Text(nota.fechaCursada, style: texto, ),
+                  ],
                 ),
+                Column(
+                  children: <Widget>[
+                    Text('Nota cursada: ', style: texto,),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    Text(nota.notaCursada, style: texto,),
+                  ],
+                ), 
               ],
             ),
-            Row(
+            (nota.notaFinal == '0') ? Text('') : Row(
+              mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Text('Fecha final: ', style: texto,),
-                        Text(nota.fechaFinal, style: texto,),
-                        ],
-                      ),
-                    ],
-                  ),
+                Column(
+                  children: <Widget>[
+                    Text('Fecha final: ', style: textoFixed,),
+                  ],
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text('Nota final: ', style: texto,),
-                          Text(nota.notaFinal, style: texto,), 
-                        ],
-                      ),
-                    ],
-                  ),
+                Column(
+                  children: <Widget>[
+                    Text(nota.fechaFinal, style: texto, ),
+                  ],
                 ),
+                Column(
+                  children: <Widget>[
+                    Text('Nota final: ', style: texto,),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    Text(nota.notaFinal, style: texto,),
+                  ],
+                ), 
               ],
             ),
           ],
