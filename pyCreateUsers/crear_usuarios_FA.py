@@ -20,6 +20,7 @@ def getData(sheet):
 
 def getDataFileFromFile(file):
     df = pandas.read_csv(file)
+    df.fillna('', inplace=True)
     df = df.to_numpy().tolist()
     return df
 
@@ -33,7 +34,7 @@ db = firestore.client()
 
 i = 0
 d = data[i]
-while d:
+while d and i < len(data):
     if d[2] == 'Curso':
         continue
 
@@ -61,26 +62,29 @@ while d:
                 "nombre": d[4],
                 "anio_cursada": str(d[1]).replace('.0', ''),
                 "curso": d[2],
-                "cuatrimestre": d[3],
+                "cuatrimestre": str(d[3]).replace('.0', ''),
                 "condicion": d[12],
                 "estado": d[18],
-                "nota_cursada": d[13],
+                "nota_cursada": str(d[13]).replace('.0', ''),
                 "fecha_cursada": d[14],
-                "nota_final": d[15],
-                "fecha_final": d[16] if d[16] == None else  '',
-                "llamado": d[17] if d[17] == None else  ''
+                "nota_final": str(d[15]).replace('.0', ''),
+                "fecha_final": d[16],
+                "llamado": str(d[17]).replace('.0', '')
                 }
 
         alumno['notas'].append(nota)
 
         i += 1
+
+        if i >= len(data):
+            break
+
         d = data[i]
 
     print("grabando: ", nombre)
-    print("notas: ", alumno)
 
     doc_ref = db.collection(u'alumnos').document(user.uid)
-    #doc_ref.set(alumno)
+    doc_ref.set(alumno)
     print("grabo: ", nombre)
 
     print("=====> proximo: ", d[8])

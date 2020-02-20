@@ -80,23 +80,23 @@ class _SingInState extends State<SingIn> {
                     }
                   },
                 ),
-                SizedBox(height: 20.0),
-                BotonRedondoConImagen(
-                  texto: "Sing In with Google",
-                  imagen: Image(image: AssetImage("assets/google-logo.png"), height: 35.0),
-                  onPressed: () async {
-                    setState(() => loading = true);
+                // SizedBox(height: 20.0),
+                // BotonRedondoConImagen(
+                //   texto: "Sing In with Google",
+                //   imagen: Image(image: AssetImage("assets/google-logo.png"), height: 35.0),
+                //   onPressed: () async {
+                //     setState(() => loading = true);
 
-                    dynamic user = await _authService.signInWithGoogle();
+                //     dynamic user = await _authService.signInWithGoogle();
 
-                    if (user == null) {
-                      setState(() {
-                        error = 'Error de credenciales';
-                        loading = false;
-                      });
-                    }
-                  },
-                ),
+                //     if (user == null) {
+                //       setState(() {
+                //         error = 'Error de credenciales';
+                //         loading = false;
+                //       });
+                //     }
+                //   },
+                // ),
                 SizedBox(height: 20.0),
                 Text(
                   error, 

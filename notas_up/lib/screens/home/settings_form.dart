@@ -25,7 +25,7 @@ class _FormSettingsState extends State<FormSettings> {
         stream: DatabaseService(uid: user.uid).alumno,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
 
           Alumno alumno = snapshot.data;
